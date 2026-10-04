@@ -1,92 +1,174 @@
-<h1 align="center">👋 Hello, I'm Mayank</h1>
+<h1 align="center">Mayank Kumar Gupta</h1>
 
 <p align="center">
-  <em>I build systems that try to understand language, and small things that make life nicer.</em>
+  <em>Almost everything here started as something I personally needed.</em>
 </p>
 
 ---
 
-Most of my days go into a stack that takes a question, turns it into a parse tree, resolves the
-entities against a semantic graph store, and answers from **structure** rather than from
-similarity. Embeddings are wonderful and they will carry you a long way. I keep being pulled
-back to approaches where you can point at *why* an answer came out the way it did.
+I don't usually start with a technology. I start with a thing that is mildly broken in my own
+life, sit with the irritation slightly too long, and then build something.
 
-The rest of my time goes into things I wanted to exist. Those are usually more fun to explain.
+The pattern is consistent enough that I stopped pretending it was a coincidence. My family
+was playing a board game and I couldn't join. My inbox had thirty thousand emails hiding one
+that mattered. My fiancée was working remotely at Valentine's. Every planner I tried wanted
+me to think in lists when my actual day is a route between places.
 
-<br />
-
-## 🧠 What I love building
-
-| | |
-|---|---|
-| 🌳 **Language that holds its shape** | Parse trees, entity recognition without a statistical model underneath, graph stores that keep meaning instead of rows |
-| 🔍 **Retrieval that knows the difference** | Hybrid vector-plus-keyword search, resolving a question to the right table cell rather than the nearest paragraph |
-| 🤖 **Agent orchestration** | Workflow frameworks for composing and scaling AI agents |
-| 🧱 **Platforms, not apps** | Shared models, shared clients, an SDK, infrastructure that orchestrates the set. The unglamorous layer that decides whether the next ten features are pleasant or painful |
-| 📐 **Writing the architecture down** | Decision records next to the code, kept honest. I enjoy this more than I probably should |
+The other half of it: I like getting a surprising amount out of very little. A static site,
+one process, a local database. Most of what I build is designed to stay cheap and stay up.
 
 <br />
 
-## 🛠️ Things I've built, and why
+## 🗂 Relaunch
 
-### 🗺️ [navo](https://github.com/immkg/navo)
+*Private repository*
 
-An intent-first planning system. Every planner I tried wanted me to think in lists and boards,
-but that is not how a day actually works — you form an intention, you carry context, and then
-you execute it while physically moving between home, an office, a shop, a school. Where you
-are determines what is even possible. Navo models that instead of pretending it away.
+You spend years building things, and the record of it scatters. Across repositories,
+across tickets, across organisations you no longer have access to, across your own memory.
 
-The [architecture notes](https://github.com/immkg/navo/blob/main/ARCHITECTURE.md) and decision
-records are the honest part of this repo. **Start there if you want to see how I think.**
+Then one day you want to move, and you discover you can't actually answer simple questions
+about your own work. What did I build? Where did I genuinely contribute? What am I strongest
+at? Which of this matters for the thing in front of me now?
 
-### 🔎 [TalkingDB/module-ttt](https://github.com/TalkingDB/module-ttt)
+Relaunch is an attempt to build a catalogue of professional work: what was built, where the
+contribution was, which technologies were involved, what problem it solved, how the pieces
+connect. The idea underneath it is that you relaunch yourself by understanding the work you
+have already done, not by writing a new summary of it.
 
-Symbolic reasoning workflows at the centre of the retrieval stack above. The answer to "can we
-do this structurally instead of statistically" turned out to be mostly yes, and this is where
-that lives.
-
-### 🧩 [general-scheduler](https://github.com/immkg/general-scheduler)
-
-Timetable scheduling, handed to Z3. Rooms, teachers, hours, and a pile of constraints that
-cheerfully contradict each other. Writing the constraints down and letting a solver find the
-answer is enormously more satisfying than any heuristic I could have written by hand. An old
-favourite.
-
-### 🎲 [ludo-anywhere](https://github.com/immkg/ludo-anywhere) · [myludo.life](https://www.myludo.life)
-
-Mobile-first multiplayer Ludo. Create a room, send the link, everyone joins from whatever
-device is in their hand. Built because getting four people around one physical board turns out
-to be the hardest scheduling problem of all.
-
-### 📧 [gmail-cleaner](https://github.com/immkg/gmail-cleaner)
-
-> *"Because somewhere in those 50,000 emails is a tax document you actually need."*
-
-Local-first, SQLite underneath, nothing leaves your machine. I wrote it for myself and then it
-seemed unkind not to share.
-
-### 📚 [clarity-classes](https://github.com/immkg/clarity-classes)
-
-Structured, concept-based learning for CBSE students, Classes 7 to 12. Open source and
-completely free. Good explanations should not be a paid feature.
+It's private, so this is the shape rather than the internals: a local-first data store
+scoped per person, an API with validation on every write path (learned the hard way), and a
+set of collectors that pull from the places work actually lives.
 
 <br />
 
-## 🧰 What I reach for
+## 🎲 [Ludo Anywhere](https://github.com/immkg/ludo-anywhere) · [myludo.life](https://www.myludo.life)
 
-**Python** and **TypeScript** mostly · a bit of **Dart** when something wants to be an app ·
-**Kubernetes** and **Terraform** to keep it all upright · **Z3** when the problem deserves a
-real solver
+My family was already playing Ludo, crowded around one phone. I wanted to join.
+
+There are plenty of good Ludo apps. None of them solved that, which was: four people, some
+in the room and some not, however many devices happen to be in hand. So the central decision
+is that **signing in is a device login, not a player login.** One phone signs in and then
+seats lightweight profiles, "Mom", "Kid 1", into the room. A family plays from one handset
+without everyone needing a Google account.
+
+The engineering that follows from caring about this:
+
+- **One Node process** runs Next.js and Socket.IO on a single port. Room state lives in
+  memory and mirrors to Redis on every change, so a restart rebuilds games in progress
+  rather than dropping them. No Redis configured? It falls back to memory and still works.
+- **Deliberately not serverless.** Serverless functions cannot hold a long-lived socket, so
+  this runs as a persistent process on a small box. That is a constraint I accepted, not one
+  I tripped over.
+- **The game engine is plain framework-agnostic JavaScript.** Pure functions, no React, no
+  socket dependency, which means the identical code is authoritative on the server and also
+  runs in your browser to highlight which tokens have a legal move before you tap.
+- **Canvas instead of SVG** (`react-konva`), because a 15×15 board does not need a DOM node
+  per cell to animate smoothly.
+- **Reconnect by seat token** in localStorage, so refreshing mid-game quietly reclaims your
+  seat instead of losing your tokens.
+- Colours are assigned in join order rather than picked, so a half-full board always blanks
+  out symmetrically.
 
 <br />
 
-## 💬 Say hello
+## 🗺 [Navo](https://github.com/immkg/navo)
 
-A good deal of my work lives in private repositories, which is the usual tax on building inside
-a company. The public slice is above.
+Most planning software starts with a task. Real life rarely does.
 
-I'm always glad to talk about retrieval, graph stores, agent frameworks, constraint solvers, or
-whatever you're currently stuck on. 🙂
+You know you need groceries. You don't yet know what you're buying, where, when, or what else
+could happen on the same trip. The starting point is an **intent**, and the work is discovered
+as the intent gets clearer.
+
+Navo takes that seriously. Intents carry context from the beginning. Work is a graph, not a
+list. **Locations are first-class entities rather than tags**, routes connect them, and the
+route through your day decides what is actually possible. Opportunities surface when location,
+time and available work line up.
+
+The part I'd point at is [ARCHITECTURE.md](https://github.com/immkg/navo/blob/main/ARCHITECTURE.md)
+and the [decision records](https://github.com/immkg/navo/tree/main/docs/adr): *intent-first*,
+*work is a graph*, *single source of truth*, *views are projections*. The architecture doc
+opens by explaining that it replaced four separate documents which had drifted out of sync
+with each other, which is the most honest thing in the repository.
+
+<br />
+
+## 📧 [Gmail Cleaner](https://github.com/immkg/gmail-cleaner)
+
+> *Because somewhere in those 50,000 emails is a tax document you actually need.*
+
+Years of accumulated mail is not a problem you solve by selecting all and deleting. You need
+the bank email to survive and the four hundred "Limited Time Offer!" messages to go.
+
+So it syncs the account into a **local SQLite database**, analyses it with Pandas and
+scikit-learn, and bulk deletes interactively. Entirely local, nothing leaves the machine.
+There is a `PROTECTED_EMAIL_PATTERNS` list that will never be touched, and the config scrubs
+your personal patterns before they reach version control, so the repo can stay synced without
+leaking your contacts. Ships on PyPI and as a standalone binary.
+
+<br />
+
+## 💝 [Bubu](https://github.com/immkg/buubuu) · [mayanklovesrichika.life](https://mayanklovesrichika.life/)
+
+A Valentine's gift for my fiancée, who was working remotely and very much missed.
+
+Eight days, Rose Day through Valentine's, each one its own little screen. React and Vite, a
+static build, nothing clever. It did not need to scale.
+
+I keep it here on purpose. Not every piece of software has to serve a billion people. Some of
+it just has to make one person smile, and that is a perfectly good reason to open an editor.
+
+<br />
+
+## 📚 [Clarity Classes](https://github.com/immkg/clarity-classes)
+
+Structured, concept-based learning for CBSE students, classes 7 to 12. Free, open source,
+concept clarity over rote learning.
+
+It is also the cleanest example of the small-footprint habit. A static React app on GitHub
+Pages, video delivered through unlisted YouTube embeds, Supabase for auth and data, email for
+notifications. A functioning learning platform with essentially no servers to pay for or keep
+alive. Good explanations shouldn't be a paid feature, and it turns out they don't have to be
+an expensive one either.
+
+<br />
+
+## 🧩 [General Scheduler](https://github.com/immkg/general-scheduler)
+
+University timetabling as a constraint satisfaction problem. Classes, teachers, rooms, hours,
+and a pile of requirements that cheerfully contradict one another.
+
+The design splits constraints into **correctness** (every lesson scheduled once, nobody double
+booked, rooms allocated without conflict) and **comfort** (preferred teaching hours, fewer
+working days, no brutal runs of back-to-back classes). A small custom query language lets you
+state those, which compiles to propositional logic in CNF and goes to the **Z3 SMT solver**.
+
+Writing down what must be true and letting a solver find the answer is enormously more
+satisfying than any heuristic I would have hand-rolled, and it is far easier to change your
+mind later.
+
+<br />
+
+## 🔧 The pattern underneath
+
+**Small infrastructure, real capability.** One process for Ludo. A static site and a free
+video host for Clarity Classes. A local SQLite file for Gmail Cleaner. I would rather spend
+thought than money, and most of these are designed to run on nearly nothing.
+
+**Model the world, not the database.** Locations as entities because you are physically
+somewhere. Device logins because a family shares a phone. Correctness separated from comfort
+because those really are different kinds of requirement.
+
+**Write the reasoning down.** Decision records sitting next to the code, kept current.
+
+**Pragmatism over purity.** Framework-agnostic game logic so it can run in two places. Redis
+optional with a graceful fallback. Canvas because the DOM was the wrong tool.
+
+<br />
+
+## 💬
+
+I'm always glad to talk about retrieval, graph stores, realtime systems, constraint solvers, or
+whatever you are currently stuck on.
 
 <p align="center">
   <a href="https://www.linkedin.com/in/immkg/">LinkedIn</a>
