@@ -87,12 +87,12 @@ machine, and there's a protected list it will never touch.
 
 ---
 
-### 💝 [Bubu](https://github.com/immkg/buubuu)
+### 💝 [Buubuu](https://github.com/immkg/buubuu)
 
 She was working remotely and I missed her. I could have bought a Valentine's gift. I built one
 instead.
 
-<p align="center"><img src="https://raw.githubusercontent.com/immkg/buubuu/main/screenshots/day1.png" width="320" alt="Bubu, day one" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/immkg/buubuu/main/screenshots/day1.png" width="320" alt="Buubuu, day one" /></p>
 
 Eight days, Rose Day through Valentine's, each its own screen, with the words kept in a data
 file rather than baked into each one so the structure and the sentiment stayed separable. A
