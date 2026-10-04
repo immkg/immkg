@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://www.linkedin.com/in/immkg/">LinkedIn</a> &nbsp;·&nbsp;
+  <a href="mailto:mayankgupta690@gmail.com">mayankgupta690@gmail.com</a> &nbsp;·&nbsp;
+  Bengaluru, India
+</p>
+
 ### I build things when something feels unnecessarily difficult.
 
 A game I couldn't join. An inbox I couldn't clean. A day that didn't fit inside a todo list.
@@ -124,5 +130,3 @@ Writing down what must be true and letting a solver find the answer beats any he
 have hand-rolled, and it is far easier to change your mind later.
 
 That question, how far a small thing goes, is most of what I find interesting.
-
-<p align="center"><a href="https://www.linkedin.com/in/immkg/">LinkedIn</a></p>
