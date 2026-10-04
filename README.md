@@ -4,7 +4,12 @@
   Bengaluru, India
 </p>
 
-### I build things when something feels unnecessarily difficult.
+# Mayank Kumar Gupta
+
+*Almost everything here started as something I personally needed.*
+
+I don't usually start with a technology. I start with a thing that is mildly broken in my own
+life, sit with the irritation slightly too long, and then build something.
 
 A game I couldn't join. An inbox I couldn't clean. A day that didn't fit inside a todo list.
 A person I missed.
