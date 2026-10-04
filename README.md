@@ -1,127 +1,110 @@
 ### I build things when something feels unnecessarily difficult.
 
-A game I couldn't join.
-An inbox I couldn't clean.
-A day that didn't fit inside a todo list.
+A game I couldn't join. An inbox I couldn't clean. A day that didn't fit inside a todo list.
 A person I missed.
+
+<img src="https://raw.githubusercontent.com/immkg/immkg/main/art/hero.png" width="460" align="right" alt="tangled things resolving into one built thing" />
 
 Sometimes the answer is software.
 
-<br />
+Usually small software. I like finding out how far a little system can go before it needs
+anything expensive underneath it.
+
+<br clear="all" />
 
 ---
 
-## 🎲 Ludo Anywhere
+### 🎲 [Ludo Anywhere](https://github.com/immkg/ludo-anywhere)
 
-> My family was playing Ludo on one phone.
-> I wanted to join.
+My family was playing Ludo on one phone. I wanted to join.
 
-So the room became the table, not the device. Sign in once on a handset, seat "Mom" and
-"Kid 1" into it, and a family plays together from one screen while anyone else joins from
-theirs.
+<img src="https://raw.githubusercontent.com/immkg/immkg/main/art/ludo-room.png" width="520" align="right" alt="four devices, one board" />
 
-<a href="https://github.com/immkg/ludo-anywhere">
-  <img src="https://raw.githubusercontent.com/immkg/ludo-anywhere/main/docs/images/board-hero.jpg" width="100%" alt="Four seated players on a Ludo board" />
-</a>
+So the room became the table instead of the device. One handset signs in, seats "Mom" and
+"Kid 1", and anyone else joins from their own screen.
 
-One Node process. Room state in memory, mirrored to Redis so a restart doesn't drop a game.
-Runs for about a dollar a month.
+One Node process holds the whole thing. Room state in memory, mirrored to Redis so a restart
+doesn't drop a game in progress. Runs for about a dollar a month.
 
-`Next.js` · `Socket.IO` · `Canvas` · `Redis` · [repo](https://github.com/immkg/ludo-anywhere) · [myludo.life](https://www.myludo.life)
+`Next.js` · `Socket.IO` · `Canvas` · [myludo.life](https://www.myludo.life)
 
-<br />
+<br clear="all" />
 
 ---
 
-## 🗺 Navo
+### 🗺 [Navo](https://github.com/immkg/navo)
 
-> A todo list asks *what*.
-> Real life starts with *I need to get this done*, somewhere, at some point, probably on the
-> way back from something else.
+A todo list asks *what*. Real life starts with *I need to get this done*, somewhere, probably
+on the way back from something else.
 
-An experiment in turning intent into a plan you can actually walk through.
+<img src="https://raw.githubusercontent.com/immkg/immkg/main/art/navo-route.png" width="500" align="right" alt="an intention becoming a route" />
 
-<a href="https://github.com/immkg/navo">
-  <img src="https://raw.githubusercontent.com/immkg/navo/main/docs/navo-vision.png" width="100%" alt="How Navo works: intention to work, plan to action" />
-</a>
+Navo takes the intention as the starting point and works out the day around it. Locations are
+real entities rather than tags, and the route decides what's actually possible.
 
-Locations are entities, not tags. Work is a graph. The route decides what's possible.
+The [decision records](https://github.com/immkg/navo/tree/main/docs/adr) are the honest part.
 
-`Express` · `Prisma` · `React` · [repo](https://github.com/immkg/navo) · [decision records](https://github.com/immkg/navo/tree/main/docs/adr)
+`Express` · `Prisma` · `React`
 
-<br />
+<br clear="all" />
 
 ---
 
-## 🗂 Relaunch · *private*
+### 🗂 Relaunch · *private*
 
-> Years of work leave a trail. Projects, decisions, technologies, things you built and forgot
-> you built.
+Years of work leave a trail. Projects, decisions, technologies, things you built and forgot
+you built.
 
-Relaunch turns that trail into something you can navigate. What you made, where you actually
-contributed, what it connects to.
+<img src="https://raw.githubusercontent.com/immkg/immkg/main/art/relaunch-map.png" width="520" align="right" alt="scattered work becoming navigable" />
 
-The current one. Still being built.
+Then you want to move, and discover you can't answer simple questions about your own career.
 
-<br />
+Relaunch turns the trail into something you can navigate. It's the current one, still being
+built.
 
----
-
-## 📧 Gmail Cleaner
-
-> Somewhere in those 50,000 emails is a tax document you actually need.
-
-You can't select all and delete. So it pulls the whole account into local SQLite, looks at it
-with Pandas, and lets you cut. Nothing leaves the machine. There's a protected list it will
-never touch.
-
-`Python` · `SQLite` · `scikit-learn` · [repo](https://github.com/immkg/gmail-cleaner)
-
-<br />
+<br clear="all" />
 
 ---
 
-## 💝 Bubu
+### 📧 [Gmail Cleaner](https://github.com/immkg/gmail-cleaner)
 
-> She was working remotely. I missed her.
->
-> I could have bought a Valentine's gift. I built one instead.
+Somewhere in those 50,000 emails is a tax document you actually need, so you can't just select
+all and delete.
+
+<img src="https://raw.githubusercontent.com/immkg/immkg/main/art/gmail-home.png" width="480" align="right" alt="mail stays on your machine" />
+
+It pulls the account into local SQLite and lets you cut from there. Nothing leaves the machine,
+and there's a protected list it will never touch.
+
+`Python` · `SQLite` · `scikit-learn`
+
+<br clear="all" />
+
+---
+
+### 💝 [Bubu](https://github.com/immkg/buubuu)
+
+She was working remotely and I missed her. I could have bought a Valentine's gift.
+
+Eight days, eight screens, a heart-shaped cursor, and a No button that behaves exactly as you'd
+expect a No button to behave. It did not need to scale.
 
 <a href="https://github.com/immkg/buubuu">
-  <img src="https://raw.githubusercontent.com/immkg/buubuu/main/screenshots/day1.png" width="100%" alt="Bubu, day one" />
+  <img src="https://raw.githubusercontent.com/immkg/buubuu/main/screenshots/day1.png" width="420" alt="Bubu, day one" />
 </a>
-
-Eight days, eight screens, a heart-shaped cursor, and a No button that behaves exactly as you
-would expect a No button to behave.
-
-`React` · `GSAP` · [mayanklovesrichika.life](https://mayanklovesrichika.life/)
-
-<br />
 
 ---
 
-## 🧩 General Scheduler
+<img src="https://raw.githubusercontent.com/immkg/immkg/main/art/small-system.png" width="430" align="right" alt="a small system going a long way" />
 
-> Rooms, teachers, hours, and a pile of requirements that contradict each other.
+### How far can a small thing go?
 
-Say what must be true, split into *correctness* and *comfort*, compile it to logic, hand it to
-a solver.
+[Clarity Classes](https://github.com/immkg/clarity-classes) is free CBSE learning running on a
+static site and a few free tiers. [General Scheduler](https://github.com/immkg/general-scheduler)
+hands university timetabling to Z3 instead of a heuristic.
 
-<a href="https://github.com/immkg/general-scheduler">
-  <img src="https://raw.githubusercontent.com/immkg/general-scheduler/master/docs/scheduled_timetable.png" width="100%" alt="A generated timetable" />
-</a>
+That question is most of what I find interesting.
 
-`Z3` · `SAT/CNF` · [repo](https://github.com/immkg/general-scheduler)
+<br clear="all" />
 
-<br />
-
----
-
-Also around: [Clarity Classes](https://github.com/immkg/clarity-classes), free CBSE learning
-running on a static site and a few free tiers.
-
-I like finding out how far a small system can go.
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/immkg/">LinkedIn</a>
-</p>
+<p align="center"><a href="https://www.linkedin.com/in/immkg/">LinkedIn</a></p>
