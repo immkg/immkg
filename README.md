@@ -84,11 +84,17 @@ list. **Locations are first-class entities rather than tags**, routes connect th
 route through your day decides what is actually possible. Opportunities surface when location,
 time and available work line up.
 
-The part I'd point at is [ARCHITECTURE.md](https://github.com/immkg/navo/blob/main/ARCHITECTURE.md)
-and the [decision records](https://github.com/immkg/navo/tree/main/docs/adr): *intent-first*,
+You can read that straight out of the schema rather than taking my word for it:
+`Intent`, `Work`, `WorkDependency` (the graph), `Location` and `LocationOption`, `Context`,
+`Plan`, `PlanStop`, `PlanStopWork`. The idea and the data model are the same shape.
+
+It's an npm workspaces monorepo, Express and Prisma on the API side, Vite and React on the
+web. The part I'd actually point at is
+[ARCHITECTURE.md](https://github.com/immkg/navo/blob/main/ARCHITECTURE.md) and the
+[decision records](https://github.com/immkg/navo/tree/main/docs/adr): *intent-first*,
 *work is a graph*, *single source of truth*, *views are projections*. The architecture doc
-opens by explaining that it replaced four separate documents which had drifted out of sync
-with each other, which is the most honest thing in the repository.
+opens by admitting it replaced four separate documents that had drifted out of sync with each
+other, which is the most honest thing in the repository.
 
 <br />
 
@@ -111,8 +117,13 @@ leaking your contacts. Ships on PyPI and as a standalone binary.
 
 A Valentine's gift for my fiancée, who was working remotely and very much missed.
 
-Eight days, Rose Day through Valentine's, each one its own little screen. React and Vite, a
-static build, nothing clever. It did not need to scale.
+Eight screens, Rose Day through Valentine's, with the words kept in `data/dayContent.js`
+rather than baked into each one, so the structure and the sentiment stayed separable. React,
+Vite, Tailwind, GSAP and Framer Motion doing the animation.
+
+The components are the part that gives it away: `HeartCursor`, `ValentineStepper`,
+`SoundToggle`, and a `NoButton` that does what a NoButton has always done. Static build,
+nothing clever, no backend. It did not need to scale.
 
 I keep it here on purpose. Not every piece of software has to serve a billion people. Some of
 it just has to make one person smile, and that is a perfectly good reason to open an editor.
