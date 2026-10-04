@@ -27,21 +27,12 @@ My family was playing Ludo on one phone. I wanted to join.
 
 <p align="center"><img src="https://raw.githubusercontent.com/immkg/immkg/main/art/ludo-room.png" width="300" alt="four devices, one board" /></p>
 
-There are plenty of good Ludo apps. None of them solved that, which was: four people, some in
-the room and some not, however many devices happen to be in hand. So signing in is a *device*
-login rather than a player one. One handset signs in, seats lightweight profiles like "Mom"
-and "Kid 1", and a family plays from a single screen while anyone else joins from their own.
+So I built a room where the game doesn't care how many devices are around it. Signing in is a
+*device* login rather than a player one: one handset seats "Mom" and "Kid 1", and anyone else
+joins from their own screen.
 
-A single Node process runs Next.js and Socket.IO on one port. Room state lives in memory and
-mirrors to Redis on every change, so a restart rebuilds games in progress instead of dropping
-them. Deliberately not serverless, because a serverless function cannot hold a long-lived
-socket. The game engine is plain framework-agnostic JavaScript, so the identical pure functions
-are authoritative on the server and also run in your browser to light up which tokens have a
-legal move before you tap. The board is canvas rather than SVG, because a 15×15 grid does not
-need a DOM node per cell to animate. Each seat carries a token in localStorage, so refreshing
-mid-game quietly reclaims your place.
-
-Runs for about a dollar a month.
+One process. Realtime rooms held in memory, mirrored to Redis so a restart doesn't drop a game.
+About a dollar a month.
 
 `Next.js` · `Socket.IO` · `Canvas` · `Redis` · [myludo.life](https://www.myludo.life)
 
@@ -59,13 +50,8 @@ are first-class entities rather than tags, routes connect them, and the route th
 decides what is actually possible. Opportunities surface when location, time and available work
 line up.
 
-You can read that straight out of the schema instead of taking my word for it: `Intent`,
-`Work`, `WorkDependency`, `Location`, `LocationOption`, `Plan`, `PlanStop`. The idea and the
-data model are the same shape.
-
+The idea and the data model are the same shape, which you can read straight out of the schema.
 The [decision records](https://github.com/immkg/navo/tree/main/docs/adr) are the honest part.
-The architecture doc opens by admitting it replaced four separate documents that had drifted
-out of sync with each other.
 
 `Express` · `Prisma` · `React`
 
@@ -74,16 +60,16 @@ out of sync with each other.
 ### 🗂 Relaunch · *private*
 
 Years of work leave a trail. Projects, decisions, technologies, things you built and forgot you
-built, scattered across repositories and tickets and organisations you no longer have access to.
+built.
 
 <p align="center"><img src="https://raw.githubusercontent.com/immkg/immkg/main/art/relaunch-map.png" width="320" alt="scattered work becoming navigable" /></p>
 
-Then one day you want to move, and discover you cannot actually answer simple questions about
-your own career. What did I build? Where did I genuinely contribute? What am I strongest at?
+Then you want to move, and find you can't answer simple questions about your own career.
 
-Relaunch is an attempt to turn that trail into something navigable. The idea underneath it is
-that you relaunch yourself by understanding the work you have already done, rather than by
-writing a fresh summary of it. It's the current one, still being built.
+Relaunch is my attempt to make that trail navigable. You relaunch yourself by understanding the
+work you have already done, not by writing a fresh summary of it.
+
+*Private, still being built.*
 
 ---
 
@@ -94,10 +80,8 @@ all and delete.
 
 <p align="center"><img src="https://raw.githubusercontent.com/immkg/immkg/main/art/gmail-home.png" width="300" alt="mail stays on your machine" /></p>
 
-It syncs the account into a local SQLite database, analyses it with Pandas and scikit-learn,
-and bulk deletes interactively. Entirely local, nothing leaves the machine. There is a
-protected list it will never touch, and the config scrubs your personal patterns before they
-reach version control, so the repo can stay synced without leaking your contacts.
+It syncs the whole account into local SQLite and lets you cut from there. Nothing leaves the
+machine, and there's a protected list it will never touch.
 
 `Python` · `SQLite` · `scikit-learn`
 
@@ -128,10 +112,9 @@ for classes 7 to 12, running on a static site, unlisted video embeds and a free 
 A working learning platform with essentially nothing to pay for or keep alive.
 
 [General Scheduler](https://github.com/immkg/general-scheduler) treats university timetabling
-as a constraint satisfaction problem. Constraints split into *correctness*, every lesson
-scheduled once and nobody double booked, and *comfort*, preferred hours and fewer brutal runs
-of back-to-back classes. A small query language compiles those to CNF and hands them to Z3.
-Writing down what must be true and letting a solver find the answer beats any heuristic I would
-have hand-rolled, and it is far easier to change your mind later.
+as a constraint problem, split into *correctness* (nobody double booked) and *comfort*
+(preferred hours, no brutal runs of back-to-back classes), and hands it to Z3. Writing down what
+must be true beats any heuristic I would have hand-rolled, and it's far easier to change your
+mind later.
 
 That question, how far a small thing goes, is most of what I find interesting.
